@@ -33,6 +33,7 @@ class Subject(models.Model):
 class University(models.Model):
     name = models.CharField(max_length=100)
     subject = models.ManyToManyField(Subject)
+    pic = models.ImageField()
 
     def __str__(self):
         return self.name
