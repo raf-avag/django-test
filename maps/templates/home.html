@@ -81,7 +81,16 @@
             {{ form.as_p }}
             <input style="color: #25b7c4; font-weight: 600;" type="submit" value="Create" />
         </form>
+
+        <!-- {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+        </ul>
+        {% endif %} -->
     </div>
+
 
 </body>
 

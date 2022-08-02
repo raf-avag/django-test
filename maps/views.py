@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 from .models import University, Subject
 from .forms import UniversityForm
+from django.contrib import messages
 
 
 @login_required
@@ -15,12 +16,16 @@ def homePageView(request):
     if form.is_valid():
         u = form.cleaned_data.get("name")
         s = form.cleaned_data.get("subject")
-        print(u, s)
 
+        # if len(s) > 1:
         uni = University.objects.create(name=u)
         for i in s:
             uni.subject.add(i.id)
         # uni.save()
+        # else:
+        #     messages.add_message(
+        #         request, messages.ERROR, "Choose at least 2 subjects for a university."
+        #     )
     return render(request, "home.html", {"universities": universities, "form": form})
 
 
