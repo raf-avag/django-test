@@ -6,6 +6,40 @@ from django.contrib.auth import authenticate, login
 from .models import University, Subject
 from .forms import UniversityForm
 from django.contrib import messages
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+
+
+class UniList(ListView):
+    model = University
+    context_object_name = "universities"
+    template_name = "uni2.html"
+
+
+class UniDetail(DetailView):
+    model = University
+    context_object_name = "uni"
+    template_name = "uni.html"
+
+
+class UniUpdate(UpdateView):
+    model = University
+    fields = ["name", "subject"]
+    success_url = reverse_lazy("uni")
+
+
+class UniDelete(DeleteView):
+    model = University
+    context_object_name = "universities"
+    success_url = reverse_lazy("uni")
+
+
+class UniCreate(CreateView):
+    model = University
+    fields = ["name", "subject"]
+    success_url = reverse_lazy("uni")
 
 
 @login_required
